@@ -284,7 +284,7 @@ bool downloadTools(fs::path path)
 {
 	Network network;
 
-	ToolsDownloader downloader(network, FUSION_BASE_URL, version);
+	ToolsDownloader downloader(network);
 
 	bool success = downloader.download(path);
 

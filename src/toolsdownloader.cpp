@@ -11,16 +11,18 @@ bool ToolsDownloader::download(const fs::path& to)
 }
 
 bool ToolsDownloader::downloadDirectly(const fs::path& to) {
+	fs::create_directory(to);
+
 	std::string darwin_out = (to / TOOLS_DARWIN_NAME).string();
 	std::string darwin_pre15_out = (to / TOOLS_DARWIN_PRE15_NAME).string();
 
 	try
 	{
-		Logger::info(std::string("Downloading ") + TOOLS_DARWIN_NAME + " from " + TOOLS_DARWIN_URL);
+		Logger::info(std::string("Downloading ") + TOOLS_DARWIN_NAME + " from " + TOOLS_DARWIN_URL + " into " + darwin_out);
 
 		network.curlDownload(TOOLS_DARWIN_URL, darwin_out);
 
-		Logger::info(std::string("Downloading ") + TOOLS_DARWIN_PRE15_NAME + " from " + TOOLS_DARWIN_PRE15_URL);
+		Logger::info(std::string("Downloading ") + TOOLS_DARWIN_PRE15_NAME + " from " + TOOLS_DARWIN_PRE15_URL + " into " + darwin_pre15_out);
 
 		network.curlDownload(TOOLS_DARWIN_PRE15_URL, darwin_pre15_out);
 	}
